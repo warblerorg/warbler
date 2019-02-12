@@ -1,0 +1,37 @@
+{
+    "name": "@yacs/frontend",
+    "version": "0.0.0",
+    "description": "Yet Another Comment System",
+    "repository": "yacsorg/yacs",
+    "bugs": "https://github.com/yacsorg/yacs/issues",
+    "homepage": "https://github.com/yacsorg/yacs#readme",
+    "scripts": {
+        "test": "jest",
+        "build": "rollup -c",
+        "lint": "tsc --noEmit && prettier --parser typescript \"src/**/*.{ts,tsx}\" --write",
+        "lint:check": "tsc --noEmit && prettier --parser typescript \"src/**/*.{ts,tsx}\" --check"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/jest": "^24.0.0",
+        "http-server": "^0.11.1",
+        "jest": "^23.6.0",
+        "prettier": "^1.16.4",
+        "rollup": "^1.1.2",
+        "rollup-plugin-typescript": "^1.0.0",
+        "ts-jest": "^23.10.5",
+        "tslib": "^1.9.3",
+        "typescript": "^3.3.3"
+    },
+    "engines": {
+        "node": ">=10.14.2"
+    },
+    "jest": {
+        "preset": "ts-jest/presets/js-with-ts"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "proseWrap": "always"
+    }
+}
