@@ -1,6 +1,7 @@
-import { allComments } from './all-comments';
-import { comment } from './comment';
-import { h } from './dom';
+import { allComments } from './elements/all-comments';
+import { comment } from './elements/comment';
+import { h } from './elements/dom';
+import { reply, submitButton } from './elements/reply';
 
 document.body.appendChild(
     allComments({
@@ -16,6 +17,9 @@ document.body.appendChild(
                     metadata: 'Today at 5:30pm',
                     actions: h('button', { className: 'yacs-action' }, 'Reply'),
                     text: 'Hello gal!',
+                    children: reply({
+                        children: submitButton({}),
+                    }),
                 }),
             }),
             comment({
@@ -23,6 +27,9 @@ document.body.appendChild(
                 text: 'Welcome to YACS.',
                 metadata: 'Today at 5:00pm',
                 actions: h('button', { className: 'yacs-action' }, 'Reply'),
+            }),
+            reply({
+                children: submitButton({}),
             }),
         ],
     }),

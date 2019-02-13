@@ -1,6 +1,11 @@
 export type ChildType = ChildArray | Node | string | null | undefined;
 interface ChildArray extends Array<ChildType> {}
 
+/**
+ * Like `parent.appendChild()`, but for multiple children.
+ * @param parent Element to append children to.
+ * @param children Iterable of child elements.
+ */
 export function appendChildren(parent: Node, children: Iterable<ChildType>) {
     for (const child of children) {
         if (Array.isArray(child)) {

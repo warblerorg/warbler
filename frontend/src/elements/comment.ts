@@ -1,4 +1,5 @@
 import { h, ChildType } from './dom';
+import { avatar } from './avatar';
 
 export interface CommentProps {
     avatar?: string;
@@ -11,6 +12,8 @@ export interface CommentProps {
 }
 
 /**
+ * Display a comment which can contain other nested comments.
+ *
  * <article class="yacs-comment">
  *   <div class="yacs-comment__main">
  *     <a class="yacs-avatar">
@@ -27,36 +30,20 @@ export interface CommentProps {
  * </article>
  */
 export function comment(props: CommentProps) {
+    const author = h('a', { className: 'yacs-comment__author' }, props.author);
+    if (props.authorHref != null) author.href = props.authorHref;
+
     return h(
         'article',
         { className: 'yacs-comment' },
         h(
             'div',
             { className: 'yacs-comment__main' },
-            h(
-                'a',
-                { className: 'yacs-avatar', href: props.authorHref },
-                props.avatar
-                    ? h('img', {
-                          className: 'yacs-avatar__img',
-                          src: props.avatar,
-                          alt: '',
-                          height: 35,
-                          width: 35,
-                      })
-                    : h('div', { className: 'yacs-avatar__img' }),
-            ),
+            avatar(props),
             h(
                 'div',
                 { className: 'yacs-comment__content' },
-                h(
-                    'a',
-                    {
-                        className: 'yacs-comment__author',
-                        href: props.authorHref,
-                    },
-                    props.author,
-                ),
+                author,
                 h(
                     'small',
                     { className: 'yacs-comment__metadata' },
