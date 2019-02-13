@@ -16,9 +16,9 @@
     /* Comment main area: Line up avatar image and text */
     display: flex;
 }
-.yacs-comment__author {
-    /* Comment author: Spacing before metadata */
-    margin-right: 0.5em;
+.yacs-comment__metadata {
+    /* Comment metadata: Spacing before metadata */
+    margin-left: 0.5em;
 }
 
 .yacs-avatar {
@@ -36,6 +36,8 @@
 .yacs-reply__input {
     /* Reply textarea: Display as block so surrounding buttons are placed below */
     display: block;
+    font: inherit;
+    color: inherit;
 }
 
 .yacs-action,
