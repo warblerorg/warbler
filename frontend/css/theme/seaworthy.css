@@ -31,8 +31,12 @@ body {
 }
 
 .yacs-action:hover,
-.yacs-action:focus {
+.yacs-action:focus,
+.yacs-action--open {
     color: rgba(0, 0, 0, 0.87);
+}
+.yacs-action--open {
+    font-weight: 700;
 }
 
 .yacs-reply {

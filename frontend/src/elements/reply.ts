@@ -2,6 +2,7 @@ import { h, ChildType } from './dom';
 import { avatar } from './avatar';
 
 export interface ReplyProps {
+    action: string;
     avatar?: string;
     authorHref?: string;
     children?: ChildType;
@@ -32,7 +33,11 @@ export function reply(props: ReplyProps) {
 
     return h(
         'form',
-        { className: 'yacs-comment yacs-reply' },
+        {
+            className: 'yacs-comment yacs-reply',
+            action: props.action,
+            method: 'POST',
+        },
         h(
             'div',
             { className: 'yacs-comment__main' },
