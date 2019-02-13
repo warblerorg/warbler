@@ -1,0 +1,24 @@
+.yacs-all-comments__title {
+    margin: 0;
+    font-size: inherit;
+}
+
+.yacs-comment {
+    margin-top: 0.5em;
+}
+.yacs-comment .yacs-comment {
+    margin-left: 1em;
+}
+.yacs-comment__main {
+    display: flex;
+}
+
+.yacs-avatar {
+    margin-right: 0.5em;
+}
+.yacs-avatar__img {
+    display: block;
+    background: gray;
+    height: 35px;
+    width: 35px;
+}

@@ -8,8 +8,10 @@
     "scripts": {
         "test": "jest",
         "build": "rollup -c",
-        "lint": "tsc --noEmit && prettier --parser typescript \"src/**/*.{ts,tsx}\" --write",
-        "lint:check": "tsc --noEmit && prettier --parser typescript \"src/**/*.{ts,tsx}\" --check"
+        "lint:ts": "prettier --parser typescript \"src/**/*.{ts,tsx}\"",
+        "lint:css": "prettier --parser css \"**/*.css\"",
+        "lint": "tsc --noEmit && npm run lint:ts --write && npm run lint:css --write",
+        "lint:check": "tsc --noEmit && npm run lint:ts --check && npm run lint:css --check"
     },
     "dependencies": {},
     "devDependencies": {

@@ -8,7 +8,7 @@ const config = {
         format: 'esm',
         sourcemap: true,
     },
-    plugins: [typescript(), resolve(), terser()],
+    plugins: [typescript()],
 };
 
 export default [config];
