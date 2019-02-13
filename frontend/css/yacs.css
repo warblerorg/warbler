@@ -1,12 +1,15 @@
 .yacs-all-comments__title {
+    /* Title above comments (ie: "5 comments") */
     margin: 0;
     font-size: inherit;
 }
 
 .yacs-comment {
+    /* Comments: have spacing between them */
     margin-top: 0.5em;
 }
 .yacs-comment .yacs-comment {
+    /* Replies: have indentation */
     margin-left: 1em;
 }
 .yacs-comment__main {
@@ -14,11 +17,23 @@
 }
 
 .yacs-avatar {
+    /* Avatar wrappers: have space before text */
     margin-right: 0.5em;
 }
 .yacs-avatar__img {
+    /* Avatar images: 35x35 squares with background when image doesn't load */
     display: block;
     background: gray;
     height: 35px;
     width: 35px;
+}
+
+.yacs-action {
+    /* Action: Remove button styles */
+    border: 0;
+    padding: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
 }

@@ -25,7 +25,7 @@ export function allComments(props: AllCommentsProps) {
                 { className: 'yacs-all-comments__count' },
                 props.count.toString(),
             ),
-            ' Comments',
+            ' comments',
         ),
         props.children,
     );
