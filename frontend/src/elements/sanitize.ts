@@ -1,4 +1,5 @@
-const PROTOCOL_REGEX = /^(?:[a-z]+:)?\/\//;
+const PROTOCOL_REGEX = /^(?:[a-z]+:)/;
+
 const relative: unique symbol = Symbol(':relative');
 const ANCHOR_SCHEMES = Object.freeze([
     'http',
@@ -6,11 +7,83 @@ const ANCHOR_SCHEMES = Object.freeze([
     'mailto',
     'xmpp',
     relative,
-    'github-windows',
-    'github-mac',
     'irc',
     'ircs',
 ]);
+const ALLOWED_ATTRIBUTES = new Set([
+    'abbr',
+    'accept',
+    'accept-charset',
+    'accesskey',
+    'action',
+    'align',
+    'alt',
+    'aria-describedby',
+    'aria-hidden',
+    'aria-label',
+    'aria-labelledby',
+    'axis',
+    'border',
+    'cellpadding',
+    'cellspacing',
+    'char',
+    'charoff',
+    'charset',
+    'checked',
+    'clear',
+    'cols',
+    'colspan',
+    'color',
+    'compact',
+    'coords',
+    'datetime',
+    'dir',
+    'disabled',
+    'enctype',
+    'for',
+    'frame',
+    'headers',
+    'height',
+    'hreflang',
+    'hspace',
+    'ismap',
+    'label',
+    'lang',
+    'maxlength',
+    'media',
+    'method',
+    'multiple',
+    'name',
+    'nohref',
+    'noshade',
+    'nowrap',
+    'open',
+    'prompt',
+    'readonly',
+    'rel',
+    'rev',
+    'rows',
+    'rowspan',
+    'rules',
+    'scope',
+    'selected',
+    'shape',
+    'size',
+    'span',
+    'start',
+    'summary',
+    'tabindex',
+    'target',
+    'title',
+    'type',
+    'usemap',
+    'valign',
+    'value',
+    'vspace',
+    'width',
+    'itemprop',
+]);
+
 const WHITELIST = Object.freeze({
     elements: new Set([
         'h1',
@@ -76,7 +149,6 @@ const WHITELIST = Object.freeze({
         'time',
         'wbr',
     ]),
-    removeContents: Object.freeze(['script']),
     attributes: Object.freeze({
         a: new Set(['href']),
         img: new Set(['src', 'longdesc']),
@@ -85,80 +157,11 @@ const WHITELIST = Object.freeze({
         del: new Set(['cite']),
         ins: new Set(['cite']),
         q: new Set(['cite']),
-        all: new Set([
-            'abbr',
-            'accept',
-            'accept-charset',
-            'accesskey',
-            'action',
-            'align',
-            'alt',
-            'aria-describedby',
-            'aria-hidden',
-            'aria-label',
-            'aria-labelledby',
-            'axis',
-            'border',
-            'cellpadding',
-            'cellspacing',
-            'char',
-            'charoff',
-            'charset',
-            'checked',
-            'clear',
-            'cols',
-            'colspan',
-            'color',
-            'compact',
-            'coords',
-            'datetime',
-            'dir',
-            'disabled',
-            'enctype',
-            'for',
-            'frame',
-            'headers',
-            'height',
-            'hreflang',
-            'hspace',
-            'ismap',
-            'label',
-            'lang',
-            'maxlength',
-            'media',
-            'method',
-            'multiple',
-            'name',
-            'nohref',
-            'noshade',
-            'nowrap',
-            'open',
-            'prompt',
-            'readonly',
-            'rel',
-            'rev',
-            'rows',
-            'rowspan',
-            'rules',
-            'scope',
-            'selected',
-            'shape',
-            'size',
-            'span',
-            'start',
-            'summary',
-            'tabindex',
-            'target',
-            'title',
-            'type',
-            'usemap',
-            'valign',
-            'value',
-            'vspace',
-            'width',
-            'itemprop',
-        ]),
-    }) as { [nodeName: string]: Set<string> },
+        all: ALLOWED_ATTRIBUTES,
+    }) as {
+        readonly all: Set<string>;
+        readonly [nodeName: string]: Set<string> | undefined;
+    },
     protocols: Object.freeze({
         a: Object.freeze({ href: ANCHOR_SCHEMES }),
         blockquote: { cite: Object.freeze(['http', 'https', relative]) },
@@ -170,7 +173,7 @@ const WHITELIST = Object.freeze({
             longdesc: Object.freeze(['http', 'https', relative]),
         }),
     }) as {
-        [nodeName: string]: {
+        readonly [nodeName: string]: {
             [attr: string]: ReadonlyArray<string | typeof relative>;
         };
     },
@@ -183,13 +186,13 @@ const WHITELIST = Object.freeze({
  * document.body.appendChild(sanitized);
  */
 export class Sanitizer {
-    doc: Document;
+    private doc: Document;
 
     constructor() {
         this.doc = document.implementation.createHTMLDocument();
     }
 
-    sanitize(input: string) {
+    sanitize(input: string): DocumentFragment {
         const container = this.doc.createElement('div');
         container.innerHTML = input;
         const sanitized = this.sanitizeNode(container);
@@ -201,59 +204,49 @@ export class Sanitizer {
         return result;
     }
 
-    private sanitizeNode(node: Node) {
+    private sanitizeNode(node: Node): Node {
         const nodeName = node.nodeName.toLowerCase();
         if (nodeName === '#text') {
             return node; // Text is always safe
         } else if (nodeName === '#comment') {
             return this.doc.createTextNode(''); // Strip comments
         }
+        // Stringify unwanted elements
         const element = node as Element;
         if (!WHITELIST.elements.has(nodeName)) {
             return this.doc.createTextNode(element.outerHTML);
         }
 
+        // Duplicate the element and copy attributes
         const copy = this.doc.createElement(nodeName);
-        for (let i = 0; i < element.attributes.length; i++) {
-            const attr = element.attributes.item(i)!.name;
-            const allowedAttrs = WHITELIST.attributes[nodeName];
+        const allowedAttrs = WHITELIST.attributes[nodeName];
+        Array.from(element.attributes, attr => {
             if (
-                (allowedAttrs && allowedAttrs.has(nodeName)) ||
-                WHITELIST.attributes.all.has(attr)
+                WHITELIST.attributes.all.has(attr.name) ||
+                (allowedAttrs && allowedAttrs.has(attr.name))
             ) {
-                copy.setAttribute(
-                    attr,
-                    this.sanitizeAttr(
-                        element.getAttribute(attr),
-                        nodeName,
-                        attr,
-                    ),
-                );
+                copy.setAttribute(attr.name, this.sanitizeAttr(attr, nodeName));
             }
-        }
+        });
 
-        while (node.firstChild) {
-            const child = node.removeChild(node.firstChild);
+        while (element.firstChild) {
+            const child = element.removeChild(element.firstChild);
             copy.appendChild(this.sanitizeNode(child));
         }
         return copy;
     }
 
-    private sanitizeAttr(
-        value: string | null,
-        nodeName: string,
-        attrName: string,
-    ) {
-        if (!value) return '';
+    private sanitizeAttr(attr: Attr, nodeName: string) {
+        if (!attr.value) return '';
         const allowedProtocols =
             WHITELIST.protocols[nodeName] &&
-            WHITELIST.protocols[nodeName][attrName];
-        if (allowedProtocols == null) return value;
+            WHITELIST.protocols[nodeName][attr.name];
+        if (allowedProtocols == null) return attr.value;
         for (const protocol of allowedProtocols) {
             if (protocol === relative) {
-                if (!PROTOCOL_REGEX.test(value)) return value;
-            } else if (value.startsWith(`${protocol}://`)) {
-                return value;
+                if (!PROTOCOL_REGEX.test(attr.value)) return attr.value;
+            } else if (attr.value.startsWith(`${protocol}:`)) {
+                return attr.value;
             }
         }
         return '';

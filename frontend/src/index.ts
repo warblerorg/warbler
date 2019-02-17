@@ -3,6 +3,7 @@ import { allComments } from './elements/all-comments';
 import { comment } from './elements/comment';
 import { reply, submitButton } from './elements/reply';
 import { handleReplyClick } from './listeners/reply-action';
+import { Sanitizer } from './elements/sanitize';
 
 const main = allComments({
     count: 3,
@@ -38,3 +39,9 @@ main.addEventListener(
 );
 
 document.body.appendChild(main);
+
+document.body.appendChild(
+    new Sanitizer().sanitize(
+        `<img alt="Safety" onload="alert('Break things')">`,
+    ),
+);
