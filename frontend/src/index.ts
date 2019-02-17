@@ -23,6 +23,7 @@ const main = allComments({
             author: 'Em',
             text: 'Welcome to YACS.',
             metadata: 'Today at 5:00pm',
+            avatar: 'https://www.thispersondoesnotexist.com/',
             actions: replyAction({}),
         }),
         reply({
