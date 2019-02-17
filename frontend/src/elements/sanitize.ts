@@ -196,7 +196,7 @@ export class Sanitizer {
 
         const result = document.createDocumentFragment();
         while (sanitized.firstChild) {
-            result.appendChild(sanitized.firstChild);
+            result.appendChild(document.adoptNode(sanitized.firstChild));
         }
         return result;
     }
