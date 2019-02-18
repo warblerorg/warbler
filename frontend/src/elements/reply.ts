@@ -12,13 +12,13 @@ export interface ReplyProps {
 /**
  * Let the user input their reply as a new comment.
  *
- * <form class="yacs-comment yacs-reply">
- *   <div class="yacs-comment__main">
- *     <a class="yacs-avatar">
- *       <img class="yacs-avatar__img" src="">
+ * <form class="warbler-comment warbler-reply">
+ *   <div class="warbler-comment__main">
+ *     <a class="warbler-avatar">
+ *       <img class="warbler-avatar__img" src="">
  *     </a>
- *     <div class="yacs-comment__content">
- *       <textarea class="yacs-reply__input" name="reply" required>
+ *     <div class="warbler-comment__content">
+ *       <textarea class="warbler-reply__input" name="reply" required>
  *       {{children}}
  *     </div>
  *   </div>
@@ -26,7 +26,7 @@ export interface ReplyProps {
  */
 export function reply(props: ReplyProps) {
     const textarea = h('textarea', {
-        className: 'yacs-reply__input',
+        className: 'warbler-reply__input',
         name: 'reply',
         required: true,
     });
@@ -35,17 +35,17 @@ export function reply(props: ReplyProps) {
     return h(
         'form',
         {
-            className: 'yacs-comment yacs-reply',
+            className: 'warbler-comment warbler-reply',
             action: props.action,
             method: 'POST',
         },
         h(
             'div',
-            { className: 'yacs-comment__main yacs-reply__main' },
+            { className: 'warbler-comment__main warbler-reply__main' },
             avatar(props),
             h(
                 'div',
-                { className: 'yacs-comment__content yacs-reply__content' },
+                { className: 'warbler-comment__content warbler-reply__content' },
                 textarea,
                 props.children,
             ),
@@ -60,14 +60,14 @@ interface SubmitButtonProps {
 /**
  * Button to submit a reply. Use as child for `reply` if a user is logged in.
  *
- * <button class="yacs-reply__submit" type="submit">
+ * <button class="warbler-reply__submit" type="submit">
  *   Add reply
  * </button>
  */
 export function submitButton({ children = 'Add reply' }: SubmitButtonProps) {
     return h(
         'button',
-        { className: 'yacs-reply__submit', type: 'submit' },
+        { className: 'warbler-reply__submit', type: 'submit' },
         children,
     );
 }

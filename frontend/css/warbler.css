@@ -1,31 +1,31 @@
-.yacs-all-comments__title {
+.warbler-all-comments__title {
     /* Title above comments (ie: "5 comments") */
     margin: 0;
     font-size: inherit;
 }
 
-.yacs-comment {
+.warbler-comment {
     /* Comments: have spacing between them */
     margin-top: 0.5em;
 }
-.yacs-comment .yacs-comment {
+.warbler-comment .warbler-comment {
     /* Replies: have indentation */
     margin-left: 1em;
 }
-.yacs-comment__main {
+.warbler-comment__main {
     /* Comment main area: Line up avatar image and text */
     display: flex;
 }
-.yacs-comment__metadata {
+.warbler-comment__metadata {
     /* Comment metadata: Spacing before metadata */
     margin-left: 0.5em;
 }
 
-.yacs-avatar {
+.warbler-avatar {
     /* Avatar wrappers: have space before text */
     margin-right: 0.5em;
 }
-.yacs-avatar__img {
+.warbler-avatar__img {
     /* Avatar images: 35x35 squares with background when image doesn't load */
     display: block;
     background: gray;
@@ -33,15 +33,15 @@
     width: 35px;
 }
 
-.yacs-reply__input {
+.warbler-reply__input {
     /* Reply textarea: Display as block so surrounding buttons are placed below */
     display: block;
     font: inherit;
     color: inherit;
 }
 
-.yacs-action,
-.yacs-reply__submit {
+.warbler-action,
+.warbler-reply__submit {
     /* Action & submit reply: Remove button styles */
     border: 0;
     padding: 0;

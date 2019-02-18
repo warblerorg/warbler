@@ -17,21 +17,21 @@ export function handleReplyClick({
     return (evt: MouseEvent) => {
         // Find the button that was clicked
         const actionButton = (evt.target as Element).closest(
-            '.yacs-action[data-type="reply"]',
+            '.warbler-action[data-type="reply"]',
         );
         if (actionButton == null) return;
-        const main = actionButton.closest('.yacs-comment__main');
+        const main = actionButton.closest('.warbler-comment__main');
         if (main == null) return;
         const comment = main.parentElement;
         if (comment == null) return;
 
         const maybeReplyForm = main.nextElementSibling;
         // If form is open...
-        if (maybeReplyForm && maybeReplyForm.matches('.yacs-reply')) {
+        if (maybeReplyForm && maybeReplyForm.matches('.warbler-reply')) {
             // Close the form.
             const replyForm = maybeReplyForm;
             comment.removeChild(replyForm);
-            actionButton.classList.remove('yacs-action--open');
+            actionButton.classList.remove('warbler-action--open');
         } else {
             // Open a form.
             const siblingComment = maybeReplyForm;
@@ -44,7 +44,7 @@ export function handleReplyClick({
                 }),
                 siblingComment,
             );
-            actionButton.classList.add('yacs-action--open');
+            actionButton.classList.add('warbler-action--open');
         }
     };
 }

@@ -14,45 +14,45 @@ export interface CommentProps {
 /**
  * Display a comment which can contain other nested comments.
  *
- * <article class="yacs-comment">
- *   <div class="yacs-comment__main">
- *     <a class="yacs-avatar">
- *       <img class="yacs-avatar__img" src="">
+ * <article class="warbler-comment">
+ *   <div class="warbler-comment__main">
+ *     <a class="warbler-avatar">
+ *       <img class="warbler-avatar__img" src="">
  *     </a>
- *     <div class="yacs-comment__content">
- *       <a class="yacs-comment__author">{{author}}</a>
- *       <small class="yacs-comment__metadata">{{metadata}}</small>
- *       <div class="yacs-comment__text">{{text}}</div>
- *       <small class="yacs-comment__actions">{{actions}}</small>
+ *     <div class="warbler-comment__content">
+ *       <a class="warbler-comment__author">{{author}}</a>
+ *       <small class="warbler-comment__metadata">{{metadata}}</small>
+ *       <div class="warbler-comment__text">{{text}}</div>
+ *       <small class="warbler-comment__actions">{{actions}}</small>
  *     </div>
  *   </div>
  *   {{children}}
  * </article>
  */
 export function comment(props: CommentProps) {
-    const author = h('a', { className: 'yacs-comment__author' }, props.author);
+    const author = h('a', { className: 'warbler-comment__author' }, props.author);
     if (props.authorHref != null) author.href = props.authorHref;
 
     return h(
         'article',
-        { className: 'yacs-comment' },
+        { className: 'warbler-comment' },
         h(
             'div',
-            { className: 'yacs-comment__main' },
+            { className: 'warbler-comment__main' },
             avatar(props),
             h(
                 'div',
-                { className: 'yacs-comment__content' },
+                { className: 'warbler-comment__content' },
                 author,
                 h(
                     'small',
-                    { className: 'yacs-comment__metadata' },
+                    { className: 'warbler-comment__metadata' },
                     props.metadata,
                 ),
-                h('div', { className: 'yacs-comment__text' }, props.text),
+                h('div', { className: 'warbler-comment__text' }, props.text),
                 h(
                     'small',
-                    { className: 'yacs-comment__actions' },
+                    { className: 'warbler-comment__actions' },
                     props.actions,
                 ),
             ),

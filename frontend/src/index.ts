@@ -21,7 +21,7 @@ const main = allComments({
         }),
         comment({
             author: 'Em',
-            text: 'Welcome to YACS.',
+            text: 'Welcome to warbler.',
             metadata: 'Today at 5:00pm',
             avatar: 'https://www.thispersondoesnotexist.com/',
             actions: replyAction({}),

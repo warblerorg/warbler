@@ -1,10 +1,10 @@
 {
-    "name": "@yacs/frontend",
+    "name": "@warbler/frontend",
     "version": "0.0.1",
     "description": "Yet Another Comment System",
-    "repository": "yacsorg/yacs",
-    "bugs": "https://github.com/yacsorg/yacs/issues",
-    "homepage": "https://github.com/yacsorg/yacs#readme",
+    "repository": "yacsorg/warbler",
+    "bugs": "https://github.com/yacsorg/warbler/issues",
+    "homepage": "https://github.com/yacsorg/warbler#readme",
     "license": "MIT",
     "scripts": {
         "test": "jest",

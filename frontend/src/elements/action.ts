@@ -5,7 +5,7 @@ export interface ActionProps {
 }
 
 function action(props: ActionProps & { type: string }) {
-    const element = h('button', { className: 'yacs-action' }, props.children);
+    const element = h('button', { className: 'warbler-action' }, props.children);
     element.dataset.type = props.type;
     return element;
 }
@@ -13,8 +13,8 @@ function action(props: ActionProps & { type: string }) {
 /**
  * Button to reply to a form.
  *
- * <a class="yacs-avatar">
- *   <img class="yacs-avatar__img" src={avatar} alt="" height="35" width="35">
+ * <a class="warbler-avatar">
+ *   <img class="warbler-avatar__img" src={avatar} alt="" height="35" width="35">
  * </a>
  */
 export function replyAction({ children = 'Reply' }: ActionProps) {

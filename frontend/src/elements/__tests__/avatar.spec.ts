@@ -4,7 +4,7 @@ describe('avatar element', () => {
     test('should return a link', () => {
         const element = avatar({});
         expect(element.tagName).toBe('A');
-        expect(element.className).toBe('yacs-avatar');
+        expect(element.className).toBe('warbler-avatar');
     });
 
     test('should set href if provided', () => {
@@ -20,7 +20,7 @@ describe('avatar element', () => {
         expect(element.childNodes[0]).toMatchObject(
             expect.objectContaining({
                 tagName: 'DIV',
-                className: 'yacs-avatar__img yacs-avatar__img--blank',
+                className: 'warbler-avatar__img warbler-avatar__img--blank',
             }),
         );
     });
@@ -31,7 +31,7 @@ describe('avatar element', () => {
         expect(element.childNodes[0]).toMatchObject(
             expect.objectContaining({
                 tagName: 'IMG',
-                className: 'yacs-avatar__img',
+                className: 'warbler-avatar__img',
                 src: 'https://example.com/profile.jpg',
                 alt: '',
                 height: 35,

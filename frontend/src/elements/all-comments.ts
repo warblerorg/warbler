@@ -8,9 +8,9 @@ export interface AllCommentsProps {
 /**
  * Wrapper for all comments.
  *
- * <section class="yacs-all-comments">
- *   <h6 class="yacs-all-comments__title">
- *     <span class="yacs-all-comments__count">{{count}}</span> Comments
+ * <section class="warbler-all-comments">
+ *   <h6 class="warbler-all-comments__title">
+ *     <span class="warbler-all-comments__count">{{count}}</span> Comments
  *   </h6>
  *   {{children}}
  * </section>
@@ -18,13 +18,13 @@ export interface AllCommentsProps {
 export function allComments(props: AllCommentsProps) {
     return h(
         'section',
-        { className: 'yacs-all-comments' },
+        { className: 'warbler-all-comments' },
         h(
             'h6',
-            { className: 'yacs-all-comments__title' },
+            { className: 'warbler-all-comments__title' },
             h(
                 'span',
-                { className: 'yacs-all-comments__count' },
+                { className: 'warbler-all-comments__count' },
                 props.count.toString(),
             ),
             ' comments',
