@@ -6,6 +6,7 @@ export interface ReplyProps {
     avatar?: string;
     authorHref?: string;
     children?: ChildType;
+    label?: string;
 }
 
 /**
@@ -29,7 +30,7 @@ export function reply(props: ReplyProps) {
         name: 'reply',
         required: true,
     });
-    textarea.setAttribute('aria-label', 'Reply');
+    textarea.setAttribute('aria-label', props.label || 'Reply');
 
     return h(
         'form',
@@ -40,11 +41,11 @@ export function reply(props: ReplyProps) {
         },
         h(
             'div',
-            { className: 'yacs-comment__main' },
+            { className: 'yacs-comment__main yacs-reply__main' },
             avatar(props),
             h(
                 'div',
-                { className: 'yacs-comment__content' },
+                { className: 'yacs-comment__content yacs-reply__content' },
                 textarea,
                 props.children,
             ),
