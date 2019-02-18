@@ -1,4 +1,6 @@
-# warbler
+<img src="warbler.svg" alt="" height="128">
+
+# Warbler
 
 Yet Another Comment System
 
