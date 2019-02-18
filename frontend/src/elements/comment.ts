@@ -30,7 +30,11 @@ export interface CommentProps {
  * </article>
  */
 export function comment(props: CommentProps) {
-    const author = h('a', { className: 'warbler-comment__author' }, props.author);
+    const author = h(
+        'a',
+        { className: 'warbler-comment__author' },
+        props.author,
+    );
     if (props.authorHref != null) author.href = props.authorHref;
 
     return h(

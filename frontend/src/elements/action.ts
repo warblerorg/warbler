@@ -5,7 +5,11 @@ export interface ActionProps {
 }
 
 function action(props: ActionProps & { type: string }) {
-    const element = h('button', { className: 'warbler-action' }, props.children);
+    const element = h(
+        'button',
+        { className: 'warbler-action' },
+        props.children,
+    );
     element.dataset.type = props.type;
     return element;
 }

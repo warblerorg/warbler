@@ -11,16 +11,16 @@
         "build": "rollup -c",
         "lint:ts": "prettier --parser typescript \"src/**/*.{ts,tsx}\"",
         "lint:css": "prettier --parser css \"**/*.css\"",
-        "lint": "tsc --noEmit && npm run lint:ts --write && npm run lint:css --write",
-        "lint:check": "tsc --noEmit && npm run lint:ts --check && npm run lint:css --check"
+        "lint": "tsc --noEmit && npm run lint:ts -- --write && npm run lint:css -- --write",
+        "lint:check": "tsc --noEmit && npm run lint:ts -- --check && npm run lint:css -- --check"
     },
     "dependencies": {},
     "devDependencies": {
-        "@types/jest": "^24.0.0",
+        "@types/jest": "^24.0.6",
         "http-server": "^0.11.1",
         "jest": "^23.6.0",
         "prettier": "^1.16.4",
-        "rollup": "^1.1.2",
+        "rollup": "^1.2.1",
         "rollup-plugin-typescript": "^1.0.0",
         "ts-jest": "^23.10.5",
         "tslib": "^1.9.3",

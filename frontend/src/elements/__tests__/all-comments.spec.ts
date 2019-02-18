@@ -8,7 +8,9 @@ describe('all-comments element', () => {
 
         expect(element.children).toHaveLength(1);
         expect(element.children[0].tagName).toBe('H6');
-        expect(element.children[0].className).toBe('warbler-all-comments__title');
+        expect(element.children[0].className).toBe(
+            'warbler-all-comments__title',
+        );
     });
 
     test('should have span with count in header', () => {

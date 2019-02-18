@@ -45,7 +45,10 @@ export function reply(props: ReplyProps) {
             avatar(props),
             h(
                 'div',
-                { className: 'warbler-comment__content warbler-reply__content' },
+                {
+                    className:
+                        'warbler-comment__content warbler-reply__content',
+                },
                 textarea,
                 props.children,
             ),

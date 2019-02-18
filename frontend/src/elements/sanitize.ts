@@ -192,7 +192,14 @@ export class Sanitizer {
         this.doc = document.implementation.createHTMLDocument();
     }
 
+    /**
+     * Sanitize a HTML string by removing dangerous HTML elements & attributes.
+     * Inflates the string into a DocumentFragment containing the sanitized
+     * elements. Blacklisted elements are converted to text.
+     * @param input HTML string to sanitize.
+     */
     sanitize(input: string): DocumentFragment {
+        // Create container to sandbox new HTML
         const container = this.doc.createElement('div');
         container.innerHTML = input;
         const sanitized = this.sanitizeNode(container);
@@ -236,19 +243,31 @@ export class Sanitizer {
         return copy;
     }
 
-    private sanitizeAttr(attr: Attr, nodeName: string) {
+    /**
+     * Sanitize attributes by removing blacklisted protocols, such as `javascript:`.
+     * @param attr Attribute to sanitize.
+     * @param tagName HTML tag of the element this attribute belongs to.
+     * @returns New value for the attribute.
+     */
+    private sanitizeAttr(attr: Attr, tagName: string) {
+        // Return empty string for blank attributes
         if (!attr.value) return '';
-        const allowedProtocols =
-            WHITELIST.protocols[nodeName] &&
-            WHITELIST.protocols[nodeName][attr.name];
+        // Get the allowed protocols from the whitelist, if specified.
+        const allowedProtocols = WHITELIST.protocols[tagName]
+            ? WHITELIST.protocols[tagName][attr.name]
+            : null;
+        // If no whitelist is specified just allow the value.
         if (allowedProtocols == null) return attr.value;
+
         for (const protocol of allowedProtocols) {
             if (protocol === relative) {
+                // Allow relative URLs that don't have a protocol specified.
                 if (!PROTOCOL_REGEX.test(attr.value)) return attr.value;
             } else if (attr.value.startsWith(`${protocol}:`)) {
+                // Allow the attribute if the URL matches.
                 return attr.value;
             }
         }
-        return '';
+        return ''; // Return empty string if blacklisted.
     }
 }
