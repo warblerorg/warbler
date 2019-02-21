@@ -7,7 +7,8 @@ export interface ReplyProps {
     authorHref?: string;
     children?: ChildType;
     label?: string;
-    replyTo?: string;
+    parentId?: string;
+    threadId: string;
 }
 
 /**
@@ -28,7 +29,7 @@ export interface ReplyProps {
 export function reply(props: ReplyProps) {
     const textarea = h('textarea', {
         className: 'warbler-reply__input',
-        name: 'reply',
+        name: 'content',
         required: true,
     });
     textarea.setAttribute('aria-label', props.label || 'Reply');
@@ -40,13 +41,18 @@ export function reply(props: ReplyProps) {
             action: props.action,
             method: 'POST',
         },
-        props.replyTo
+        props.parentId
             ? h('input', {
                   type: 'hidden',
-                  name: 'parent',
-                  value: props.replyTo,
+                  name: 'parent_id',
+                  value: props.parentId,
               })
             : null,
+        h('input', {
+            type: 'hidden',
+            name: 'thread_id',
+            value: props.threadId,
+        }),
         h(
             'div',
             { className: 'warbler-comment__main warbler-reply__main' },
