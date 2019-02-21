@@ -7,6 +7,7 @@ export interface ReplyProps {
     authorHref?: string;
     children?: ChildType;
     label?: string;
+    replyTo?: string;
 }
 
 /**
@@ -39,6 +40,13 @@ export function reply(props: ReplyProps) {
             action: props.action,
             method: 'POST',
         },
+        props.replyTo
+            ? h('input', {
+                  type: 'hidden',
+                  name: 'parent',
+                  value: props.replyTo,
+              })
+            : null,
         h(
             'div',
             { className: 'warbler-comment__main warbler-reply__main' },

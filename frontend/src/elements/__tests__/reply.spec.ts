@@ -39,7 +39,7 @@ describe('reply element', () => {
         expect(content.children[0].tagName).toBe('TEXTAREA');
         expect(content.children[0].className).toBe('warbler-reply__input');
         expect(content.children[0].getAttribute('aria-label')).toBe('Reply');
-        expect(content.children[0]).toHaveProperty('name', 'reply');
+        expect(content.children[0]).toHaveProperty('name', 'message');
         expect(content.children[0]).toHaveProperty('required', true);
     });
 
