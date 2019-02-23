@@ -2,21 +2,19 @@
 openapi: 3.0.0
 info:
     title: Warbler
+    description: >
+        Yet another comment system.
     version: '1.0.0'
     license:
         name: 'MIT'
         url: 'https://opensource.org/licenses/MIT'
 servers:
-    - url: https://{warblerServer}:{port}/v1
+    - url: https://{warblerServer}/v1
+      description: Warbler self-hosted server
       variables:
           warblerServer:
               default: your-warbler-server.com
               description: Domain name of your warbler server
-          port:
-              enum:
-                  - '443'
-                  - '8443'
-              default: '443'
     - url: https://warbler.io/v1
       description: Warbler Pro server
 tags:
