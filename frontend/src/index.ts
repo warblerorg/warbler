@@ -28,6 +28,7 @@ const main = allComments({
         }),
         reply({
             action: '',
+            threadId: '',
             children: submitButton({}),
         }),
     ],

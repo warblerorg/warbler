@@ -1,7 +1,8 @@
 import { h, ChildType } from './dom';
 
 export interface AllCommentsProps {
-    count: number;
+    count: number | null;
+    threadId?: string;
     children?: ChildType;
 }
 
@@ -16,7 +17,7 @@ export interface AllCommentsProps {
  * </section>
  */
 export function allComments(props: AllCommentsProps) {
-    return h(
+    const section = h(
         'section',
         { className: 'warbler-all-comments' },
         h(
@@ -25,10 +26,12 @@ export function allComments(props: AllCommentsProps) {
             h(
                 'span',
                 { className: 'warbler-all-comments__count' },
-                props.count.toString(),
+                props.count != null ? props.count.toString() : 'Loading',
             ),
             ' comments',
         ),
         props.children,
     );
+    section.dataset.threadId = props.threadId;
+    return section;
 }
