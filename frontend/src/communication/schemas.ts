@@ -1,7 +1,7 @@
 export interface Comment {
     thread_id: string;
-    comment_id: string;
-    parent_id: string;
+    comment_id: number;
+    parent_id: number;
     author: Author;
     author_association: 'none' | 'author';
     content: string;
@@ -12,7 +12,7 @@ export interface Comment {
 }
 
 export interface MoreComment {
-    comment_id: string;
+    comment_id: number;
     count: number;
 }
 
@@ -34,4 +34,10 @@ export interface Author {
     name: string;
     website: string;
     avatar_url: string;
+}
+
+export function isMoreComment(
+    comment: Comment | MoreComment,
+): comment is MoreComment {
+    return 'count' in comment;
 }

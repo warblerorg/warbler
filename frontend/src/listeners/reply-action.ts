@@ -40,6 +40,7 @@ export function handleReplyClick({
                     action,
                     avatar,
                     authorHref,
+                    threadId: '',
                     children: submit(),
                 }),
                 siblingComment,

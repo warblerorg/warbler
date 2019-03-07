@@ -14,7 +14,7 @@ export function getComments(
     server: string,
     threadId: string,
     query?: { sort?: 'asc' | 'desc'; max_depth?: string },
-): Promise<CommentsArray> {
+): Promise<{ comments: CommentsArray; total: number }> {
     const queryString = query
         ? `?${new URLSearchParams(query as StringRecord)}`
         : '';

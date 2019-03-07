@@ -1,19 +1,16 @@
 import { h, ChildType } from './dom';
 import { avatar } from './avatar';
-import { Sanitizer } from '../communication/sanitize';
 
 export interface CommentProps {
     avatar?: string;
     author?: string;
     authorHref?: string;
-    commentId: string;
+    commentId: number;
     metadata?: ChildType;
-    text: string;
+    text: ChildType;
     actions?: ChildType;
     children?: ChildType;
 }
-
-const sanitizer = new Sanitizer();
 
 /**
  * Display a comment which can contain other nested comments.
@@ -60,11 +57,7 @@ export function comment(props: CommentProps) {
                     { className: 'warbler-comment__metadata' },
                     props.metadata,
                 ),
-                h(
-                    'div',
-                    { className: 'warbler-comment__text' },
-                    sanitizer.sanitize(props.text),
-                ),
+                h('div', { className: 'warbler-comment__text' }, props.text),
                 h(
                     'small',
                     { className: 'warbler-comment__actions' },
