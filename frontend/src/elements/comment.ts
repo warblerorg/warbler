@@ -1,6 +1,6 @@
 import { h, ChildType } from './dom';
 import { avatar } from './avatar';
-import { Sanitizer } from './sanitize';
+import { Sanitizer } from '../communication/sanitize';
 
 export interface CommentProps {
     avatar?: string;

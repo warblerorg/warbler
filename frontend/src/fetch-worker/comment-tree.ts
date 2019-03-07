@@ -1,4 +1,4 @@
-import { Comment } from '../communication/types';
+import { Comment } from '../communication/schemas';
 
 export interface Node {
     data: Comment | null;

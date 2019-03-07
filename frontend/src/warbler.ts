@@ -3,7 +3,7 @@ import { replyAction } from './elements/action';
 import { allComments } from './elements/all-comments';
 import { comment } from './elements/comment';
 import { appendChildren } from './elements/dom';
-import { Comment } from './communication/types';
+import { Comment } from './communication/schemas';
 
 export interface WarblerOptions {
     threadId: string;

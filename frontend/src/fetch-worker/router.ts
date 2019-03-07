@@ -3,7 +3,7 @@ import {
     fetchCommentList,
 } from './fetch-comment-list';
 import { Tree } from './comment-tree';
-import { NewComment } from '../communication/types';
+import { NewComment } from '../communication/schemas';
 
 interface FetchCommentListAction {
     type: 'fetch-comment-list';
