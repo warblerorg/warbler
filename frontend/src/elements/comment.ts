@@ -42,7 +42,7 @@ export function comment(props: CommentProps) {
         'article',
         {
             className: 'warbler-comment',
-            id: `warbler-comment-${props.commentId}`,
+            id: `comment-${props.commentId}`,
         },
         h(
             'div',

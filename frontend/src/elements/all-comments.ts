@@ -2,23 +2,22 @@ import { h, ChildType } from './dom';
 
 export interface AllCommentsProps {
     count: number | null;
-    threadId?: string;
     children?: ChildType;
 }
 
 /**
  * Wrapper for all comments.
  *
- * <section class="warbler-all-comments">
+ * <div class="warbler-all-comments">
  *   <h6 class="warbler-all-comments__title">
  *     <span class="warbler-all-comments__count">{{count}}</span> Comments
  *   </h6>
  *   {{children}}
- * </section>
+ * </div>
  */
 export function allComments(props: AllCommentsProps) {
-    const section = h(
-        'section',
+    return h(
+        'div',
         { className: 'warbler-all-comments' },
         h(
             'h6',
@@ -32,6 +31,4 @@ export function allComments(props: AllCommentsProps) {
         ),
         props.children,
     );
-    section.dataset.threadId = props.threadId;
-    return section;
 }

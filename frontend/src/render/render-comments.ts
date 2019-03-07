@@ -1,32 +1,25 @@
 import { Sanitizer } from '../communication/sanitize';
-import {
-    Comment,
-    CommentsArray,
-    isMoreComment,
-    MoreComment,
-} from '../communication/schemas';
+import { CommentsArray, isMoreComment } from '../communication/schemas';
 import { allComments, comment } from '../elements';
+import { renderActions } from './render-actions';
+import { renderMetadata } from './render-metadata';
 
-export function renderComments(
-    threadId: string,
-    total: number,
-    data: CommentsArray,
-) {
+export function renderComments(total: number, data: CommentsArray) {
     const sanitizer = new Sanitizer();
     const container = allComments({
-        threadId,
         count: total,
-        children: data.map(function renderComment(
-            com: Comment | MoreComment,
-        ): HTMLElement | null {
+        children: data.map(function renderComment(com): HTMLElement | null {
+            const commentId = com.comment_id;
             return isMoreComment(com)
                 ? null
                 : comment({
                       avatar: com.author.avatar_url,
                       author: com.author.name,
                       authorHref: com.author.website,
-                      commentId: com.comment_id,
+                      commentId,
                       text: sanitizer.sanitize(com.content),
+                      metadata: renderMetadata(com),
+                      actions: renderActions(com),
                       children: com.children.map(renderComment),
                   });
         }),

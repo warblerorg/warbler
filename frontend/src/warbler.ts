@@ -1,9 +1,9 @@
 // import { getComments } from './communication/get-comments';
-import { replyAction } from './elements/action';
-import { allComments } from './elements/all-comments';
-import { comment } from './elements/comment';
-import { appendChildren } from './elements/dom';
-import { Comment, Author } from './communication/schemas';
+import { Author, CommentsArray } from './communication/schemas';
+import { submitButton } from './elements';
+import { h } from './elements/dom';
+import { handleReplyClick } from './listeners/reply-action';
+import { renderComments } from './render/render-comments';
 
 export interface WarblerOptions {
     threadId: string;
@@ -15,7 +15,10 @@ export interface Warbler {
     done: Promise<void>;
 }
 
-async function getComments(server: any, threadId: string): Promise<Comment[]> {
+async function getComments(
+    _server: any,
+    threadId: string,
+): Promise<{ comments: CommentsArray; total: number }> {
     const defaults = {
         thread_id: threadId,
         parent_id: -1,
@@ -41,57 +44,54 @@ async function getComments(server: any, threadId: string): Promise<Comment[]> {
         name: 'Em',
         website: '',
     };
-    return [
-        {
-            ...defaults,
-            comment_id: 1,
-            author: daphne,
-            content: 'Hello World!',
-            created_at: '2019-03-07T06:09:37.219Z',
-            updated_at: '2019-03-07T06:09:37.219Z',
-            children: [
-                {
-                    ...defaults,
-                    comment_id: 2,
-                    author: tiger,
-                    content: 'Hello gal!',
-                    created_at: '2019-03-07T06:09:37.219Z',
-                    updated_at: '2019-03-07T06:10:37.219Z',
-                },
-            ],
-        },
-        {
-            ...defaults,
-            comment_id: 3,
-            author: em,
-            content: 'Welcome to warbler.',
-            created_at: '2019-03-07T06:09:37.219Z',
-            updated_at: '2019-03-07T07:09:37.219Z',
-        },
-    ];
+    return {
+        comments: [
+            {
+                ...defaults,
+                comment_id: 1,
+                author: daphne,
+                content: 'Hello World!',
+                created_at: '2019-03-07T06:09:37.219Z',
+                updated_at: '2019-03-07T06:09:37.219Z',
+                children: [
+                    {
+                        ...defaults,
+                        comment_id: 2,
+                        author: tiger,
+                        content: 'Hello gal!',
+                        created_at: '2019-03-07T06:09:37.219Z',
+                        updated_at: '2019-03-07T06:10:37.219Z',
+                    },
+                ],
+            },
+            {
+                ...defaults,
+                comment_id: 3,
+                author: em,
+                content: 'Welcome to warbler.',
+                created_at: '2019-03-07T06:09:37.219Z',
+                updated_at: '2019-03-07T07:09:37.219Z',
+            },
+        ],
+        total: 3,
+    };
 }
 
 export function warbler(options: WarblerOptions): Warbler {
     let { server, threadId } = options;
-    const element = allComments({ count: null, threadId });
+    const main = h('section', { className: 'warbler' });
+    main.dataset.threadId = threadId;
+    main.addEventListener(
+        'click',
+        handleReplyClick({ action: '', submit: () => submitButton({}) }),
+    );
 
     return {
-        element,
+        element: main,
         done: getComments(server, threadId)
-            .then(commentsData =>
-                commentsData.map(commentData =>
-                    comment({
-                        commentId: commentData.comment_id,
-                        avatar: commentData.author.avatar_url,
-                        author: commentData.author.name,
-                        authorHref: commentData.author.website,
-                        text: commentData.content,
-                        actions: replyAction({}),
-                    }),
-                ),
-            )
-            .then(commentElements => {
-                appendChildren(element, commentElements);
+            .then(({ total, comments }) => renderComments(total, comments))
+            .then(commentElement => {
+                main.appendChild(commentElement);
             }),
     };
 }
