@@ -36,7 +36,7 @@ async function getComments(
         avatar_url: '',
         username: 'daphne',
         name: 'Tiger',
-        website: '',
+        website: 'https://tigeroakes.com',
     };
     const em: Author = {
         avatar_url: '',
@@ -71,6 +71,9 @@ async function getComments(
                 content: 'Welcome to warbler.',
                 created_at: '2019-03-07T06:09:37.219Z',
                 updated_at: '2019-03-07T07:09:37.219Z',
+                reactions: [
+                    { emoji: '🙂', count: 1, viewer_has_reacted: false },
+                ],
             },
         ],
         total: 3,
@@ -81,15 +84,18 @@ export function warbler(options: WarblerOptions): Warbler {
     let { server, threadId } = options;
     const main = h('section', { className: 'warbler' });
     main.dataset.threadId = threadId;
+
     main.addEventListener(
         'click',
-        handleReplyClick({ action: '', submit: () => submitButton({}) }),
+        handleReplyClick({ server, submit: () => submitButton(), threadId }),
     );
 
     return {
         element: main,
         done: getComments(server, threadId)
-            .then(({ total, comments }) => renderComments(total, comments))
+            .then(({ total, comments }) =>
+                renderComments(server, threadId, total, comments),
+            )
             .then(commentElement => {
                 main.appendChild(commentElement);
             }),

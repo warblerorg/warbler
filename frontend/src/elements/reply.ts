@@ -1,8 +1,10 @@
 import { h, ChildType } from './dom';
 import { avatar } from './avatar';
+import { handleReplySubmit } from '../listeners/submit-action';
+import { threadUrl } from '../communication/urls';
 
 export interface ReplyProps {
-    action: string;
+    server: string;
     avatar?: string;
     authorHref?: string;
     children?: ChildType;
@@ -34,12 +36,12 @@ export function reply(props: ReplyProps) {
     });
     textarea.setAttribute('aria-label', props.label || 'Reply');
 
-    return h(
+    const form = h(
         'form',
         {
             className: 'warbler-comment warbler-reply',
-            action: props.action,
-            method: 'POST',
+            action: props.server + threadUrl(props.threadId),
+            method: 'post',
         },
         props.parentId
             ? h('input', {
@@ -68,10 +70,10 @@ export function reply(props: ReplyProps) {
             ),
         ),
     );
-}
 
-interface SubmitButtonProps {
-    children?: ChildType;
+    form.addEventListener('submit', handleReplySubmit(props.server));
+
+    return form;
 }
 
 /**
@@ -81,10 +83,10 @@ interface SubmitButtonProps {
  *   Add reply
  * </button>
  */
-export function submitButton({ children = 'Add reply' }: SubmitButtonProps) {
+export function submitButton() {
     return h(
         'button',
         { className: 'warbler-reply__submit', type: 'submit' },
-        children,
+        'Add reply',
     );
 }

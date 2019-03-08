@@ -2,25 +2,28 @@ import { ChildType } from '../elements/dom';
 import { reply } from '../elements/reply';
 
 export interface HandleReplyClickOptions {
-    action: string;
+    server: string;
     avatar?: string;
     authorHref?: string;
     submit(): ChildType;
+    threadId: string;
 }
 
 export function handleReplyClick({
-    action,
+    server,
     avatar,
     authorHref,
     submit,
+    threadId,
 }: HandleReplyClickOptions) {
     return (evt: MouseEvent) => {
         // Find the button that was clicked
         const actionButton = (evt.target as Element).closest(
             '.warbler-action[data-type="reply"]',
-        );
+        ) as HTMLButtonElement | null;
         if (actionButton == null) return;
         const main = actionButton.closest('.warbler-comment__main');
+        const parentId = actionButton.dataset.commentId;
         if (main == null) return;
         const comment = main.parentElement;
         if (comment == null) return;
@@ -37,10 +40,11 @@ export function handleReplyClick({
             const siblingComment = maybeReplyForm;
             comment.insertBefore(
                 reply({
-                    action,
+                    server,
                     avatar,
                     authorHref,
-                    threadId: '',
+                    threadId,
+                    parentId,
                     children: submit(),
                 }),
                 siblingComment,

@@ -50,3 +50,7 @@
     color: inherit;
     cursor: pointer;
 }
+.warbler-action {
+    /* Action button: spacing after action */
+    margin-right: 0.5em;
+}
