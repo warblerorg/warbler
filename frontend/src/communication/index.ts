@@ -43,7 +43,7 @@ export function addComment(
 export function getComment(
     server: string,
     threadId: string,
-    commentId: string,
+    commentId: number,
     query?: { sort?: 'asc' | 'desc'; max_depth?: string },
 ): Promise<Comment> {
     const queryString = query
@@ -60,7 +60,7 @@ export function getComment(
 export function updateComment(
     server: string,
     threadId: string,
-    commentId: string,
+    commentId: number,
     newContent: string,
 ): Promise<Comment> {
     return warbleFetch(server + commentUrl(threadId, commentId), {
@@ -76,7 +76,7 @@ export function updateComment(
 export function deleteComment(
     server: string,
     threadId: string,
-    commentId: string,
+    commentId: number,
 ): Promise<Comment> {
     return warbleFetch(server + commentUrl(threadId, commentId), {
         method: 'delete',
