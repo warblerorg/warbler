@@ -6,7 +6,28 @@
         <title>Warbler Test</title>
         <script async defer src="lib/index.js"></script>
         <link rel="stylesheet" href="css/warbler.css" />
-        <link rel="stylesheet" href="css/theme/hawaiian-honeycreeper.css" />
+        <link
+            id="theme"
+            rel="stylesheet"
+            href="css/theme/hawaiian-honeycreeper.css"
+        />
     </head>
-    <body></body>
+    <body>
+        <label>
+            Theme
+            <select id="theme-select">
+                <option value="">None</option>
+                <option selected value="css/theme/hawaiian-honeycreeper.css"
+                    >Hawaiian honeycreeper</option
+                >
+            </select>
+        </label>
+    </body>
+    <script>
+        document
+            .getElementById('theme-select')
+            .addEventListener('change', evt => {
+                document.getElementById('theme').href = evt.target.value;
+            });
+    </script>
 </html>

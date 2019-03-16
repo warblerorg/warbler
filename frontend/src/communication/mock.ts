@@ -10,7 +10,7 @@ const daphne: Author = {
     avatar_url: '',
     username: 'daphne',
     name: 'Daphne Liu',
-    website: '',
+    website: null,
 };
 const tiger: Author = {
     avatar_url: '',
@@ -22,7 +22,7 @@ const em: Author = {
     avatar_url: '',
     username: 'daphne',
     name: 'Em',
-    website: '',
+    website: null,
 };
 
 export async function getComments(

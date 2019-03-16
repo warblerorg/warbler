@@ -32,7 +32,7 @@ export interface Reaction {
 export interface Author {
     username: string;
     name: string;
-    website: string;
+    website: string | null;
     avatar_url: string;
 }
 

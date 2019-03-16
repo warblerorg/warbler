@@ -12,6 +12,10 @@
     /* Replies: have indentation */
     margin-left: 1em;
 }
+.warbler-comment__author {
+    /* Author name in comment: Make links look normal */
+    color: inherit;
+}
 .warbler-comment__main {
     /* Comment main area: Line up avatar image and text */
     display: flex;
@@ -24,6 +28,7 @@
 .warbler-avatar {
     /* Avatar wrappers: have space before text */
     margin-right: 0.5em;
+    align-self: start;
 }
 .warbler-avatar__img {
     /* Avatar images: 35x35 squares with background when image doesn't load */
