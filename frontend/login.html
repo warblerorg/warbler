@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login - Warbler</title>
+        <script async defer src="lib/theme-select.js"></script>
+        <link rel="stylesheet" href="css/warbler-login.css" />
+        <link
+            id="theme"
+            rel="stylesheet"
+            href="css/theme/hawaiian-honeycreeper.css"
+        />
+    </head>
+
+    <body class="warbler-login">
+        <label>
+            Theme
+            <select id="theme-select">
+                <option value="">None</option>
+                <option selected value="css/theme/hawaiian-honeycreeper.css">
+                    Hawaiian honeycreeper
+                </option>
+            </select>
+        </label>
+        <header class="warbler-login__nav">
+            <a class="warbler-login__nav-item" href="signup.html">Signup</a>
+            <a class="warbler-login__nav-item warbler-login__nav-item--active">
+                Login
+            </a>
+        </header>
+        <form class="warbler-login__form">
+            <p class="warbler-login__description">Login to comment</p>
+            <div class="warbler-login__social-login"></div>
+            <div class="warbler-login__local">
+                <label class="warbler-login__label-wrapper">
+                    <span class="warbler-login__label">Username</span>
+                    <input
+                        class="warbler-login__input"
+                        type="text"
+                        name="username"
+                        autocomplete="username"
+                        required
+                    />
+                </label>
+                <label class="warbler-login__label-wrapper">
+                    <span class="warbler-login__label">Password</span>
+                    <input
+                        class="warbler-login__input"
+                        type="password"
+                        name="password"
+                        autocomplete="password"
+                        required
+                    />
+                </label>
+                <button type="submit" class="warbler-login__submit">
+                    Login
+                </button>
+            </div>
+        </form>
+    </body>
+</html>

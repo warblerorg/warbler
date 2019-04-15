@@ -1,0 +1,49 @@
+.warbler-login__nav {
+    /* Links to toggle between Login and Signup */
+    text-align: center;
+}
+.warbler-login__nav-item {
+    /* Single link to toggle between Login and Signup */
+    margin-left: 1em;
+    margin-right: 1em;
+    color: inherit;
+}
+
+.warbler-login__form {
+    /* Form with links and inputs */
+    margin-left: auto;
+    margin-right: auto;
+    width: 20em;
+}
+.warbler-login__description {
+    text-align: center;
+}
+
+.warbler-login__label-wrapper {
+    display: block;
+    margin-bottom: 0.5em;
+}
+.warbler-login__label {
+    display: block;
+}
+.warbler-login__input {
+    /* Input fields: take up whole width of form */
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+}
+
+.warbler-login__submit {
+    /* Login/signup button: take up whole width, have top spacing */
+    display: block;
+    margin-top: 1em;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}

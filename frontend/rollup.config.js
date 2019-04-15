@@ -11,4 +11,13 @@ const config = {
     plugins: [typescript()],
 };
 
-export default [config];
+/** @type {import('rollup').RollupOptions} */
+const themeSelectConfig = {
+    input: 'src/theme-select.js',
+    output: {
+        file: 'lib/theme-select.js',
+        format: 'esm',
+    },
+};
+
+export default [config, themeSelectConfig];

@@ -55,7 +55,8 @@ body {
     border-color: #85b7d9;
 }
 
-.warbler-reply__submit {
+.warbler-reply__submit,
+.warbler-login__submit {
     position: relative;
     z-index: 1;
     margin-top: 0.5em;
@@ -74,7 +75,8 @@ body {
 .warbler-reply__submit::before {
     content: '✎ ';
 }
-.warbler-reply__submit::after {
+.warbler-reply__submit::after,
+.warbler-login__submit::after {
     content: '';
     position: absolute;
     top: 0;
@@ -87,6 +89,17 @@ body {
     transition: opacity 0.1s ease-in;
 }
 .warbler-reply__submit:hover::after,
-.warbler-reply__submit:focus::after {
+.warbler-reply__submit:focus::after,
+.warbler-login__submit:hover::after,
+.warbler-login__submit:focus::after {
+    opacity: 1;
+}
+
+.warbler-login__nav-item {
+    font-size: 1.5em;
+    text-decoration: none;
+    opacity: 0.5;
+}
+.warbler-login__nav-item--active {
     opacity: 1;
 }
