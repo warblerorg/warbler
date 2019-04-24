@@ -9,7 +9,7 @@
     "scripts": {
         "test": "jest",
         "build": "rollup -c",
-        "lint:files": "prettier \"src/**/*.{ts,tsx}\" \"css/**/*.css\" \"*.html\"",
+        "lint:files": "prettier \"src/**/*.{ts,tsx}\" \"**/*.css\" \"*.html\"",
         "lint": "tsc --noEmit && npm run lint:files -- --write",
         "lint:check": "tsc --noEmit && npm run lint:files -- --check"
     },
