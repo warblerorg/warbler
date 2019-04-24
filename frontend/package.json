@@ -20,7 +20,9 @@
         "jest": "^24.8.0",
         "prettier": "^1.18.2",
         "rollup": "^1.16.6",
+        "rollup-plugin-svelte": "^5.1.0",
         "rollup-plugin-typescript": "^1.0.1",
+        "svelte": "^3.6.4",
         "ts-jest": "^24.0.2",
         "tslib": "^1.10.0",
         "typescript": "^3.5.2"

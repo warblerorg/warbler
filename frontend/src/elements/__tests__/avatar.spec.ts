@@ -1,21 +1,31 @@
-import { avatar } from '../avatar';
+import Avatar from '../Avatar.svelte';
 
-describe('avatar element', () => {
+describe('Avatar element', () => {
     test('should return a link', () => {
-        const element = avatar({});
+        const container = document.createElement('div');
+        const avatar = new Avatar({ target: container, props: {} });
+        const element = container.children[0];
+
         expect(element.tagName).toBe('A');
         expect(element.className).toBe('warbler-avatar');
     });
 
     test('should set href if provided', () => {
-        expect(avatar({ authorHref: 'https://example.com' })).toHaveProperty(
-            'href',
-            'https://example.com/'
-        );
+        const container = document.createElement('div');
+        const avatar = new Avatar({
+            target: container,
+            props: { authorHref: 'https://example.com' },
+        });
+        const element = container.children[0];
+
+        expect(element).toHaveProperty('href', 'https://example.com/');
     });
 
     test('should return a div when no image is specified', () => {
-        const element = avatar({});
+        const container = document.createElement('div');
+        const avatar = new Avatar({ target: container, props: {} });
+        const element = container.children[0];
+
         expect(element.childNodes).toHaveLength(1);
         expect(element.childNodes[0]).toMatchObject(
             expect.objectContaining({
@@ -26,7 +36,13 @@ describe('avatar element', () => {
     });
 
     test('should return an img when an image is specified', () => {
-        const element = avatar({ avatar: 'https://example.com/profile.jpg' });
+        const container = document.createElement('div');
+        const avatar = new Avatar({
+            target: container,
+            props: { avatar: 'https://example.com/profile.jpg' },
+        });
+        const element = container.children[0];
+
         expect(element.childNodes).toHaveLength(1);
         expect(element.childNodes[0]).toMatchObject(
             expect.objectContaining({

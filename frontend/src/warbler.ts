@@ -1,37 +1,33 @@
 import { getComments } from './communication/mock';
-import { submitButton } from './elements';
-import { h } from './elements/dom';
-import { handleReplyClick } from './listeners/reply-action';
-import { renderComments } from './render/render-comments';
+import WarblerElement from './elements/Warbler.svelte';
 
 export interface WarblerOptions {
+    target: Node;
     threadId: string;
     server: string;
 }
 
 export interface Warbler {
-    element: HTMLElement;
     done: Promise<void>;
+    destory(): void;
 }
 
-export function warbler(options: WarblerOptions): Warbler {
-    let { server, threadId } = options;
-    const main = h('section', { className: 'warbler' });
-    main.dataset.threadId = threadId;
+export function warbler({ target, server, threadId }: WarblerOptions): Warbler {
+    const promise = getComments(server, threadId);
 
-    main.addEventListener(
-        'click',
-        handleReplyClick({ server, submit: () => submitButton(), threadId })
-    );
+    const main = new WarblerElement({
+        target,
+        props: {
+            promise,
+            threadId,
+            server,
+        },
+    });
 
     return {
-        element: main,
-        done: getComments(server, threadId)
-            .then(({ total, comments }) =>
-                renderComments(server, threadId, total, comments)
-            )
-            .then(commentElement => {
-                main.appendChild(commentElement);
-            }),
+        done: promise.then(() => {}),
+        destory() {
+            main.$destory();
+        },
     };
 }

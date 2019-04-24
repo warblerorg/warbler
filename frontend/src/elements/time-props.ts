@@ -1,5 +1,3 @@
-import { h } from './dom';
-
 declare global {
     namespace Intl {
         interface RelativeTimeFormatOptions {
@@ -63,22 +61,11 @@ const detailedDate: Intl.DateTimeFormatOptions = {
     minute: '2-digit',
 };
 
-export interface TimeProps {
-    time: string | number | Date;
-    now: Date;
-}
-
-/**
- * Avatar image showing a user's avatar.
- *
- * <time class="warbler-time">Today at 5:00pm</time>
- */
-export function time(props: TimeProps) {
-    const { now } = props;
+export function timeProps(time: string | number | Date, now: Date) {
     const date =
-        typeof props.time === 'number' || typeof props.time === 'string'
-            ? new Date(props.time)
-            : props.time;
+        typeof time === 'number' || typeof time === 'string'
+            ? new Date(time)
+            : time;
     // Store milliseconds between given time and current time
     const duration = now.getTime() - date.getTime();
 
@@ -109,9 +96,8 @@ export function time(props: TimeProps) {
         timeString = date.toLocaleDateString();
     }
 
-    return h(
-        'time',
-        { dateTime: date.toISOString(), className: 'warbler-time' },
-        timeString
-    );
+    return {
+        datetime: date.toISOString(),
+        formatted: timeString,
+    };
 }
