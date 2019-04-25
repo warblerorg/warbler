@@ -1,58 +1,68 @@
 <!--
-    Display a comment which can contain other nested comments.
+    Display a comment.
+    Additional elements can be displayed below the comment using its slot.
 -->
 
 <script>
+    import { onMount } from 'svelte';
     import Avatar from './Avatar.svelte';
     import Reply from './Reply.svelte';
     import ReplyAction from './ReplyAction.svelte';
     import ReactionAction from './ReactionAction.svelte';
+    import Metadata from './Metadata.svelte';
+    import Node from './Node.svelte';
 
-    /** @type {string | undefined} */
-    export let avatar;
-    /** @type {string | undefined} */
-    export let author;
-    /** @type {string | undefined} */
-    export let authorHref;
     /** @type {string} */
-    export let commentId;
-    /** @type {string} */
+    export let server;
+    /**
+     * @type {Comment}
+     * Comment to display.
+     */
+    export let comment;
+    /**
+     * @type {DocumentFragment}
+     * Santilized element containing the content of the comment.
+     */
     export let content;
-    /** @type {Reaction[]} */
-    export let reactions;
+    /**
+     * @type {Date | undefined}
+     * The current time.
+     */
+    export let now = undefined;
 
     let open = false;
 </script>
 
-<article class="warbler-comment" id="comment-{commentId}">
+<article class="warbler-comment" id="comment-{comment.comment_id}">
     <div class="warbler-comment__main">
-        <Avatar {avatar} {authorHref}></Avatar>
+        <Avatar author="{comment.author}"></Avatar>
         <div class="warbler-comment__content">
-            <a class="warbler-comment__author" href="{authorHref}">{author}</a>
+            <a class="warbler-comment__author" href="{comment.author.website}"
+                >{comment.author.name}</a
+            >
             <small class="warbler-comment__metadata">
-                <Metadata {commentId} {createdAt} {updatedAt} {now}></Metadata>
+                <Metadata {comment} {now}></Metadata>
             </small>
-            <div class="warbler-comment__text">
-                {@html content}
-            </div>
+            <Node className="warbler-comment__text" {content}></Node>
             <small class="warbler-comment__actions">
                 <ReplyAction
-                    {commentId}
+                    commentId="{comment.comment_id}"
                     {open}
                     on:click="{evt => open = !open}"
                 ></ReplyAction>
-                {#each reactions as r (r.emoji)}
                 <ReactionAction
-                    {commentId}
-                    emoji="{r.emoji}"
-                    count="{r.count}"
+                    commentId="{comment.comment_id}"
+                    reactions="{comment.reactions}"
                 ></ReactionAction>
-                {/each}
             </small>
         </div>
     </div>
     {#if open}
-    <Reply {avatar} {authorHref} parentId="{commentId}"></Reply>
+    <Reply
+        {server}
+        parentId="{comment.comment_id}"
+        threadId="{comment.thread_id}"
+    ></Reply>
     {/if}
     <slot></slot>
 </article>

@@ -3,18 +3,19 @@
 -->
 
 <script>
-    /** @type {string | undefined} */
-    export let avatar;
-    /** @type {string | undefined} */
-    export let authorHref;
+    /**
+     * @type {Author | undefined}
+     * This user's avatar will be displayed.
+     */
+    export let author;
 </script>
 
-<a class="warbler-avatar" href="{authorHref}">
-    {#if avatar}
+<a class="warbler-avatar" href="{author && author.website}">
+    {#if author && author.avatar_url}
     <img
         class="warbler-avatar__img"
-        src="{avatar}"
-        alt=""
+        src="{author.avatar_url}"
+        alt="{author.username}"
         height="35"
         width="35"
     />

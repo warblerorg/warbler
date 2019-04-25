@@ -3,21 +3,18 @@
 -->
 
 <script>
-    import { threadUrl } from '../communication/urls.ts';
-    import { addComment } from '../communication/index.ts';
+    import { threadUrl } from '../communication/urls';
+    import { addComment } from '../communication/index';
+    import { user } from '../stores';
     import Avatar from './Avatar.svelte';
     import SubmitButton from './SubmitButton.svelte';
 
     /** @type {string} */
     export let server;
     /** @type {string | undefined} */
-    export let avatar;
-    /** @type {string | undefined} */
-    export let authorHref;
-    /** @type {string | undefined} */
     export let label = 'Reply';
     /** @type {string | undefined} */
-    export let parentId;
+    export let parentId = undefined;
     /** @type {string} */
     export let threadId;
 
@@ -40,13 +37,18 @@
     }
 </script>
 
-<form class="warbler-comment warbler-reply" {action} method="post">
+<form
+    class="warbler-comment warbler-reply"
+    {action}
+    method="post"
+    on:submit="{handleReplySubmit}"
+>
     {#if parentId}
     <input type="hidden" name="parent_id" value="{parentId}" />
     {/if}
     <input type="hidden" name="thread_id" value="{threadId}" />
     <div class="warbler-comment__main warbler-reply__main">
-        <Avatar {avatar} {authorHref}></Avatar>
+        <Avatar author="{user}"></Avatar>
         <div class="warbler-comment__content warbler-reply__content">
             <textarea
                 class="warbler-reply__input"

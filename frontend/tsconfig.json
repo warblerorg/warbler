@@ -9,6 +9,8 @@
         "pretty": true,
         "lib": ["webworker", "dom", "es2015", "es2017.object"],
         "skipLibCheck": true,
+        "allowJs": true,
+        "checkJs": true,
 
         /* Strict Type-Checking Options */
         "strict": true,

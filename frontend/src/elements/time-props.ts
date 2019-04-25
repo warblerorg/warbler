@@ -42,11 +42,13 @@ const ONE_HOUR = 3600000;
 const ONE_DAY = 86400000;
 const TWO_DAYS = 172800000;
 
-const GET_DATE = {
-    second: (date: Date) => date.getUTCSeconds(),
-    minute: (date: Date) => date.getUTCMinutes(),
-    hour: (date: Date) => date.getUTCHours(),
-    day: (date: Date) => date.getUTCDate(),
+type DateKeys = 'second' | 'minute' | 'hour' | 'day';
+
+const GET_DATE: Record<DateKeys, (date: Date) => number> = {
+    second: date => date.getUTCSeconds(),
+    minute: date => date.getUTCMinutes(),
+    hour: date => date.getUTCHours(),
+    day: date => date.getUTCDate(),
 };
 
 const relative: Intl.RelativeTimeFormatOptions = {
@@ -73,7 +75,7 @@ export function timeProps(time: string | number | Date, now: Date) {
     if (Intl.RelativeTimeFormat && duration < TWO_DAYS) {
         // Within 2 days, show a relative time.
         const formatter = new Intl.RelativeTimeFormat(undefined, relative);
-        function format(unit: keyof typeof GET_DATE) {
+        function format(unit: DateKeys) {
             return formatter.format(
                 GET_DATE[unit](now) - GET_DATE[unit](date),
                 unit

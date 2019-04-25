@@ -15,6 +15,7 @@
     type="button"
     data-type="reply"
     data-comment-id="{commentId}"
+    on:click
 >
     <slot>Reply</slot>
 </button>

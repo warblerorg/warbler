@@ -5,17 +5,17 @@
 <script>
     /** @type {number} */
     export let commentId = -1;
-    /** @type {string} */
-    export let emoji;
-    /** @type {number} */
-    export let count;
+    /** @type {Reaction[]} */
+    export let reactions;
 </script>
 
+{#each reactions as r (r.emoji)}
 <button
     class="warbler-action"
     type="button"
     data-type="react"
     data-comment-id="{commentId}"
 >
-    {emoji} {count}
+    {r.emoji} {r.count}
 </button>
+{/each}
