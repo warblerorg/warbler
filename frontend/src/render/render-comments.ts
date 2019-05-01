@@ -8,18 +8,18 @@ export function renderComments(
     server: string,
     threadId: string,
     total: number,
-    data: CommentsArray,
+    data: CommentsArray
 ) {
     const sanitizer = new Sanitizer();
     const childComments = data.map(function renderComment(
-        com,
+        com
     ): HTMLElement | null {
         return isMoreComment(com)
             ? null
             : comment({
                   avatar: com.author.avatar_url,
                   author: com.author.name,
-                  authorHref: com.author.website,
+                  authorHref: com.author.website || undefined,
                   commentId: com.comment_id,
                   text: sanitizer.sanitize(com.content),
                   metadata: renderMetadata(com),

@@ -28,7 +28,7 @@ const em: Author = {
 export async function getComments(
     server: string,
     threadId: string,
-    query?: { sort?: 'asc' | 'desc'; max_depth?: string },
+    query?: { sort?: 'asc' | 'desc'; max_depth?: string }
 ): Promise<{ comments: CommentsArray; total: number }> {
     return {
         comments: [
@@ -76,7 +76,7 @@ export async function addComment(
     server: string,
     threadId: string,
     content: string,
-    parent_id?: number,
+    parent_id?: number
 ): Promise<Comment> {
     return {
         ...defaults,
@@ -97,7 +97,7 @@ export async function getComment(
     server: string,
     threadId: string,
     commentId: number,
-    query?: { sort?: 'asc' | 'desc'; max_depth?: string },
+    query?: { sort?: 'asc' | 'desc'; max_depth?: string }
 ): Promise<Comment> {
     return {
         ...defaults,
@@ -117,7 +117,7 @@ export async function updateComment(
     server: string,
     threadId: string,
     commentId: number,
-    newContent: string,
+    newContent: string
 ): Promise<Comment> {
     return {
         ...defaults,
@@ -136,7 +136,7 @@ export async function updateComment(
 export async function deleteComment(
     server: string,
     threadId: string,
-    commentId: number,
+    commentId: number
 ): Promise<Comment> {
     return {
         ...defaults,
@@ -154,7 +154,7 @@ export async function deleteComment(
  */
 export async function previewMarkdown(
     server: string,
-    content: string,
+    content: string
 ): Promise<string> {
     return '';
 }

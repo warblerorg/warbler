@@ -37,7 +37,7 @@ export interface Author {
 }
 
 export function isMoreComment(
-    comment: Comment | MoreComment,
+    comment: Comment | MoreComment
 ): comment is MoreComment {
     return 'count' in comment;
 }

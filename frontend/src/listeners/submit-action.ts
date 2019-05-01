@@ -6,10 +6,10 @@ export function handleReplySubmit(server: string) {
         evt.preventDefault();
 
         const threadId = form.elements.namedItem(
-            'thread_id',
+            'thread_id'
         ) as HTMLInputElement;
         const parentId = form.elements.namedItem(
-            'parent_id',
+            'parent_id'
         ) as HTMLInputElement | null;
         const content = form.elements.namedItem('content') as HTMLInputElement;
 
@@ -17,7 +17,7 @@ export function handleReplySubmit(server: string) {
             server,
             threadId.value,
             content.value,
-            parentId != null ? parseInt(parentId.value, 10) : undefined,
+            parentId != null ? parseInt(parentId.value, 10) : undefined
         );
     };
 }

@@ -25,10 +25,10 @@ export function allComments(props: AllCommentsProps) {
             h(
                 'span',
                 { className: 'warbler-all-comments__count' },
-                props.count != null ? props.count.toString() : 'Loading',
+                props.count != null ? props.count.toString() : 'Loading'
             ),
-            ' comments',
+            ' comments'
         ),
-        props.children,
+        props.children
     );
 }

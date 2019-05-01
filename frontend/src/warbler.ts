@@ -21,14 +21,14 @@ export function warbler(options: WarblerOptions): Warbler {
 
     main.addEventListener(
         'click',
-        handleReplyClick({ server, submit: () => submitButton(), threadId }),
+        handleReplyClick({ server, submit: () => submitButton(), threadId })
     );
 
     return {
         element: main,
         done: getComments(server, threadId)
             .then(({ total, comments }) =>
-                renderComments(server, threadId, total, comments),
+                renderComments(server, threadId, total, comments)
             )
             .then(commentElement => {
                 main.appendChild(commentElement);

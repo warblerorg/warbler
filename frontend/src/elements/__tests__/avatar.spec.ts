@@ -10,7 +10,7 @@ describe('avatar element', () => {
     test('should set href if provided', () => {
         expect(avatar({ authorHref: 'https://example.com' })).toHaveProperty(
             'href',
-            'https://example.com/',
+            'https://example.com/'
         );
     });
 
@@ -21,7 +21,7 @@ describe('avatar element', () => {
             expect.objectContaining({
                 tagName: 'DIV',
                 className: 'warbler-avatar__img warbler-avatar__img--blank',
-            }),
+            })
         );
     });
 
@@ -36,7 +36,7 @@ describe('avatar element', () => {
                 alt: '',
                 height: 35,
                 width: 35,
-            }),
+            })
         );
     });
 });

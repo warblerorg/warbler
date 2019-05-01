@@ -7,7 +7,7 @@ export interface CommentProps {
     authorHref?: string;
     commentId: number;
     metadata?: ChildType;
-    text: ChildType;
+    text?: ChildType;
     actions?: ChildType;
     children?: ChildType;
 }
@@ -34,7 +34,7 @@ export function comment(props: CommentProps) {
     const author = h(
         'a',
         { className: 'warbler-comment__author' },
-        props.author,
+        props.author
     );
     if (props.authorHref != null) author.href = props.authorHref;
 
@@ -55,16 +55,16 @@ export function comment(props: CommentProps) {
                 h(
                     'small',
                     { className: 'warbler-comment__metadata' },
-                    props.metadata,
+                    props.metadata
                 ),
                 h('div', { className: 'warbler-comment__text' }, props.text),
                 h(
                     'small',
                     { className: 'warbler-comment__actions' },
-                    props.actions,
-                ),
-            ),
+                    props.actions
+                )
+            )
         ),
-        props.children,
+        props.children
     );
 }

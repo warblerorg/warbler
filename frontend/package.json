@@ -9,22 +9,21 @@
     "scripts": {
         "test": "jest",
         "build": "rollup -c",
-        "lint:ts": "prettier --parser typescript \"src/**/*.{ts,tsx}\"",
-        "lint:css": "prettier --parser css \"**/*.css\"",
-        "lint": "tsc --noEmit && npm run lint:ts -- --write && npm run lint:css -- --write",
-        "lint:check": "tsc --noEmit && npm run lint:ts -- --check && npm run lint:css -- --check"
+        "lint:files": "prettier \"src/**/*.{ts,tsx}\" \"css/**/*.css\"",
+        "lint": "tsc --noEmit && npm run lint:files -- --write",
+        "lint:check": "tsc --noEmit && npm run lint:files -- --check"
     },
     "dependencies": {},
     "devDependencies": {
-        "@types/jest": "^24.0.11",
+        "@types/jest": "^24.0.12",
         "http-server": "^0.11.1",
-        "jest": "^24.5.0",
-        "prettier": "^1.16.4",
-        "rollup": "^1.6.0",
-        "rollup-plugin-typescript": "^1.0.0",
-        "ts-jest": "^24.0.0",
+        "jest": "^24.7.1",
+        "prettier": "^1.17.0",
+        "rollup": "^1.10.1",
+        "rollup-plugin-typescript": "^1.0.1",
+        "ts-jest": "^24.0.2",
         "tslib": "^1.9.3",
-        "typescript": "^3.3.3333"
+        "typescript": "^3.4.5"
     },
     "engines": {
         "node": ">=10.14.2"
@@ -34,7 +33,7 @@
     },
     "prettier": {
         "singleQuote": true,
-        "trailingComma": "all",
+        "trailingComma": "es5",
         "proseWrap": "always"
     }
 }

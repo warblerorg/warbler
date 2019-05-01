@@ -99,7 +99,7 @@ describe('h', () => {
             document.createElement('span'),
             undefined,
             [document.createElement('strong'), document.createElement('b')],
-            document.createElement('em'),
+            document.createElement('em')
         );
 
         expect(element.title).toBe('Hi World');

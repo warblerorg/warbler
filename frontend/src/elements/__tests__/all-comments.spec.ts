@@ -9,7 +9,7 @@ describe('all-comments element', () => {
         expect(element.children).toHaveLength(1);
         expect(element.children[0].tagName).toBe('H6');
         expect(element.children[0].className).toBe(
-            'warbler-all-comments__title',
+            'warbler-all-comments__title'
         );
     });
 
@@ -22,7 +22,7 @@ describe('all-comments element', () => {
         expect(header.childNodes[0]).toHaveProperty('nodeName', 'SPAN');
         expect(header.childNodes[0]).toHaveProperty(
             'className',
-            'warbler-all-comments__count',
+            'warbler-all-comments__count'
         );
         expect(header.childNodes[0].textContent).toBe('10');
 

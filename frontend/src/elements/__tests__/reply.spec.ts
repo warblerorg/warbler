@@ -3,8 +3,8 @@ import { reply, submitButton } from '../reply';
 describe('reply element', () => {
     test('should return form', () => {
         const element = reply({
-            action: 'https://example.com',
-            children: submitButton({}),
+            server: 'https://example.com',
+            children: submitButton(),
             threadId: 'a113',
         });
         expect(element.tagName).toBe('FORM');
@@ -16,14 +16,14 @@ describe('reply element', () => {
         expect(element.children[0].tagName).toBe('INPUT');
         expect(element.children[1].tagName).toBe('DIV');
         expect(element.children[1].className).toBe(
-            'warbler-comment__main warbler-reply__main',
+            'warbler-comment__main warbler-reply__main'
         );
         expect(element.children[1].children).toHaveLength(2);
     });
 
     test('should include avatar', () => {
         const element = reply({
-            action: 'https://example.com',
+            server: 'https://example.com',
             threadId: 'a113',
         });
         const main = element.children[1];
@@ -33,7 +33,7 @@ describe('reply element', () => {
 
     test('should include textarea', () => {
         const element = reply({
-            action: 'https://example.com',
+            server: 'https://example.com',
             threadId: 'a113',
         });
         const main = element.children[1];
@@ -49,8 +49,8 @@ describe('reply element', () => {
 
     test('should append children after textarea', () => {
         const element = reply({
-            action: 'https://example.com',
-            children: submitButton({}),
+            server: 'https://example.com',
+            children: submitButton(),
             threadId: 'a113',
         });
         const main = element.children[1];
@@ -66,7 +66,7 @@ describe('reply element', () => {
                 className: 'warbler-reply__submit',
                 type: 'submit',
                 textContent: 'Add reply',
-            }),
+            })
         );
     });
 });

@@ -26,7 +26,7 @@ export function avatar(props: AvatarProps) {
               })
             : h('div', {
                   className: 'warbler-avatar__img warbler-avatar__img--blank',
-              }),
+              })
     );
     if (props.authorHref != null) avatar.href = props.authorHref;
     return avatar;

@@ -19,7 +19,7 @@ export function handleReplyClick({
     return (evt: MouseEvent) => {
         // Find the button that was clicked
         const actionButton = (evt.target as Element).closest(
-            '.warbler-action[data-type="reply"]',
+            '.warbler-action[data-type="reply"]'
         ) as HTMLButtonElement | null;
         if (actionButton == null) return;
         const main = actionButton.closest('.warbler-comment__main');
@@ -47,7 +47,7 @@ export function handleReplyClick({
                     parentId,
                     children: submit(),
                 }),
-                siblingComment,
+                siblingComment
             );
             actionButton.classList.add('warbler-action--open');
         }

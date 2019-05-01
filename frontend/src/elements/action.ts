@@ -9,7 +9,7 @@ function action(props: ActionProps) {
     const element = h(
         'button',
         { className: 'warbler-action' },
-        props.children,
+        props.children
     );
     Object.assign(element.dataset, props.dataset);
     return element;

@@ -15,16 +15,16 @@ describe('Sanitize', () => {
         expect(fragment.textContent).toBe('Hello world!');
 
         fragment.childNodes.forEach(node =>
-            expect(node).not.toHaveProperty('nodeName', '#comment'),
+            expect(node).not.toHaveProperty('nodeName', '#comment')
         );
     });
 
     test('should turn blocked elements into text', () => {
         const fragment = sanitizer.sanitize(
-            '<script>alert("Destroy all webpages")</script>',
+            '<script>alert("Destroy all webpages")</script>'
         );
         expect(fragment.textContent).toBe(
-            '<script>alert("Destroy all webpages")</script>',
+            '<script>alert("Destroy all webpages")</script>'
         );
         expect(fragment.children).toHaveLength(0);
     });
@@ -38,7 +38,7 @@ describe('Sanitize', () => {
 
     test('should remove blocked attributes', () => {
         const fragment = sanitizer.sanitize(
-            `<img alt="Safety" onload="alert('Break things')">`,
+            `<img alt="Safety" onload="alert('Break things')">`
         );
         expect(fragment.children).toHaveLength(1);
         expect(fragment.children[0]).toHaveProperty('tagName', 'IMG');
@@ -51,13 +51,13 @@ describe('Sanitize', () => {
 
     test('should allow links', () => {
         const fragment = sanitizer.sanitize(
-            '<a href="https://example.com">Hi</a>',
+            '<a href="https://example.com">Hi</a>'
         );
         expect(fragment.childNodes).toHaveLength(1);
         expect(fragment.childNodes[0]).toHaveProperty('tagName', 'A');
         expect(fragment.childNodes[0]).toHaveProperty(
             'href',
-            'https://example.com/',
+            'https://example.com/'
         );
         expect(fragment.childNodes[0]).toHaveProperty('textContent', 'Hi');
     });
@@ -81,23 +81,23 @@ describe('Sanitize', () => {
 
     test('should block javascript links', () => {
         const fragment = sanitizer.sanitize(
-            `<a href="javascript:void(0)"></a>`,
+            `<a href="javascript:void(0)"></a>`
         );
         expect(fragment.children[0]).not.toHaveProperty(
             'href',
-            'javascript:void(0)',
+            'javascript:void(0)'
         );
     });
 
     test('should allow relative links', () => {
         expect(
-            sanitizer.sanitize('<a href="/root/page"></a>').children[0],
+            sanitizer.sanitize('<a href="/root/page"></a>').children[0]
         ).toHaveProperty('href', 'http://localhost/root/page');
         expect(
-            sanitizer.sanitize('<a href="relative/link"></a>').children[0],
+            sanitizer.sanitize('<a href="relative/link"></a>').children[0]
         ).toHaveProperty('href', 'http://localhost/relative/link');
         expect(
-            sanitizer.sanitize('<a href="#id-on-page"></a>').children[0],
+            sanitizer.sanitize('<a href="#id-on-page"></a>').children[0]
         ).toHaveProperty('href', 'http://localhost/#id-on-page');
     });
 });

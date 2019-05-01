@@ -7,7 +7,7 @@ export function renderActions({
     reactions,
 }: Comment): ChildType {
     const actions = reactions.map(({ emoji, count }) =>
-        reactionAction({ commentId, emoji, count }),
+        reactionAction({ commentId, emoji, count })
     );
     actions.unshift(replyAction({ commentId }));
     return actions;

@@ -14,7 +14,7 @@ export function appendChildren(parent: Node, children: Iterable<ChildType>) {
             parent.appendChild(
                 typeof child === 'string'
                     ? document.createTextNode(child)
-                    : child,
+                    : child
             );
         }
     }

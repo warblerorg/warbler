@@ -19,21 +19,21 @@ declare global {
                     | 'day'
                     | 'hour'
                     | 'minute'
-                    | 'second',
+                    | 'second'
             ): string;
         }
         var RelativeTimeFormat: {
             new (
                 locales?: string | string[],
-                options?: RelativeTimeFormatOptions,
+                options?: RelativeTimeFormatOptions
             ): RelativeTimeFormat;
             (
                 locales?: string | string[],
-                options?: RelativeTimeFormatOptions,
+                options?: RelativeTimeFormatOptions
             ): RelativeTimeFormat;
             supportedLocalesOf(
                 locales: string | string[],
-                options?: RelativeTimeFormatOptions,
+                options?: RelativeTimeFormatOptions
             ): string[];
         };
     }
@@ -89,7 +89,7 @@ export function time(props: TimeProps) {
         function format(unit: keyof typeof GET_DATE) {
             return formatter.format(
                 GET_DATE[unit](now) - GET_DATE[unit](date),
-                unit,
+                unit
             );
         }
         if (duration < ONE_MINUTE) {
@@ -112,6 +112,6 @@ export function time(props: TimeProps) {
     return h(
         'time',
         { dateTime: date.toISOString(), className: 'warbler-time' },
-        timeString,
+        timeString
     );
 }

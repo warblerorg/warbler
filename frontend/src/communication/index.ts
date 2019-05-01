@@ -13,7 +13,7 @@ const json = (res: Response) => res.json();
 export function getComments(
     server: string,
     threadId: string,
-    query?: { sort?: 'asc' | 'desc'; max_depth?: string },
+    query?: { sort?: 'asc' | 'desc'; max_depth?: string }
 ): Promise<{ comments: CommentsArray; total: number }> {
     const queryString = query
         ? `?${new URLSearchParams(query as StringRecord)}`
@@ -28,7 +28,7 @@ export function addComment(
     server: string,
     threadId: string,
     content: string,
-    parent_id?: number,
+    parent_id?: number
 ): Promise<Comment> {
     return warbleFetch(server + threadUrl(threadId), {
         method: 'post',
@@ -44,13 +44,13 @@ export function getComment(
     server: string,
     threadId: string,
     commentId: number,
-    query?: { sort?: 'asc' | 'desc'; max_depth?: string },
+    query?: { sort?: 'asc' | 'desc'; max_depth?: string }
 ): Promise<Comment> {
     const queryString = query
         ? `?${new URLSearchParams(query as StringRecord)}`
         : '';
     return warbleFetch(
-        server + commentUrl(threadId, commentId) + queryString,
+        server + commentUrl(threadId, commentId) + queryString
     ).then(json);
 }
 
@@ -61,7 +61,7 @@ export function updateComment(
     server: string,
     threadId: string,
     commentId: number,
-    newContent: string,
+    newContent: string
 ): Promise<Comment> {
     return warbleFetch(server + commentUrl(threadId, commentId), {
         method: 'post',
@@ -76,7 +76,7 @@ export function updateComment(
 export function deleteComment(
     server: string,
     threadId: string,
-    commentId: number,
+    commentId: number
 ): Promise<Comment> {
     return warbleFetch(server + commentUrl(threadId, commentId), {
         method: 'delete',
@@ -88,7 +88,7 @@ export function deleteComment(
  */
 export function previewMarkdown(
     server: string,
-    content: string,
+    content: string
 ): Promise<string> {
     return warbleFetch(server + markdownUrl(), {
         method: 'post',

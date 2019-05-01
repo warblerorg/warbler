@@ -6,7 +6,7 @@ const ONE_MINUTE = 60000;
 
 export function renderMetadata(
     { created_at, updated_at }: Comment,
-    now = new Date(),
+    now = new Date()
 ): ChildType {
     const timeElement = time({ time: created_at, now });
     const isEdited =

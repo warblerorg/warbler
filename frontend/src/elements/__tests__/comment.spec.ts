@@ -2,7 +2,7 @@ import { comment } from '../comment';
 
 describe('comment element', () => {
     test('should return article', () => {
-        const element = comment({});
+        const element = comment({ commentId: 23 });
         expect(element.tagName).toBe('ARTICLE');
         expect(element.className).toBe('warbler-comment');
 
@@ -13,7 +13,7 @@ describe('comment element', () => {
     });
 
     test('should include avatar', () => {
-        const element = comment({});
+        const element = comment({ commentId: 24 });
         const main = element.children[0];
 
         expect(main.children[0]).toHaveProperty('className', 'warbler-avatar');

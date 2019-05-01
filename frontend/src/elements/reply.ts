@@ -66,9 +66,9 @@ export function reply(props: ReplyProps) {
                         'warbler-comment__content warbler-reply__content',
                 },
                 textarea,
-                props.children,
-            ),
-        ),
+                props.children
+            )
+        )
     );
 
     form.addEventListener('submit', handleReplySubmit(props.server));
@@ -87,6 +87,6 @@ export function submitButton() {
     return h(
         'button',
         { className: 'warbler-reply__submit', type: 'submit' },
-        'Add reply',
+        'Add reply'
     );
 }
