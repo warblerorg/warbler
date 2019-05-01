@@ -1,6 +1,7 @@
-export const threadUrl = (threadId: string) => `/v1/comments/${threadId}`;
+export const threadUrl = (threadId: string) =>
+    `/v1/thread/${threadId}/comments/`;
 export const commentUrl = (threadId: string, commentId: number) =>
-    `/v1/comments/${threadId}/${commentId}`;
+    `/v1/thread/${threadId}/comments/${commentId}`;
 
 export const markdownUrl = () => '/v1/markdown/';
 
