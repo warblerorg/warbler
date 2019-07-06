@@ -1,7 +1,7 @@
 {
     "name": "@warbler/frontend",
     "version": "0.0.1",
-    "description": "Yet Another Comment System",
+    "description": "An open source, decentralized commenting system you can embed in your websites.",
     "repository": "warblerorg/warbler",
     "bugs": "https://github.com/warblerorg/warbler/issues",
     "homepage": "https://github.com/warblerorg/warbler#readme",
@@ -9,21 +9,21 @@
     "scripts": {
         "test": "jest",
         "build": "rollup -c",
-        "lint:files": "prettier \"src/**/*.{ts,tsx}\" \"css/**/*.css\"",
+        "lint:files": "prettier \"src/**/*.{ts,tsx}\" \"css/**/*.css\" \"*.html\"",
         "lint": "tsc --noEmit && npm run lint:files -- --write",
         "lint:check": "tsc --noEmit && npm run lint:files -- --check"
     },
     "dependencies": {},
     "devDependencies": {
-        "@types/jest": "^24.0.12",
+        "@types/jest": "^24.0.15",
         "http-server": "^0.11.1",
-        "jest": "^24.7.1",
-        "prettier": "^1.17.0",
-        "rollup": "^1.10.1",
+        "jest": "^24.8.0",
+        "prettier": "^1.18.2",
+        "rollup": "^1.16.6",
         "rollup-plugin-typescript": "^1.0.1",
         "ts-jest": "^24.0.2",
-        "tslib": "^1.9.3",
-        "typescript": "^3.4.5"
+        "tslib": "^1.10.0",
+        "typescript": "^3.5.2"
     },
     "engines": {
         "node": ">=10.14.2"

@@ -4,13 +4,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Warbler Test</title>
-        <script async defer src="lib/index.js"></script>
-        <script async defer src="lib/theme-select.js"></script>
-        <link rel="stylesheet" href="css/warbler.css" />
+        <script async defer src="../frontend/lib/index.js"></script>
+        <script async defer src="theme-select.js"></script>
+        <link rel="stylesheet" href="../frontend/css/warbler.css" />
         <link
             id="theme"
             rel="stylesheet"
-            href="css/theme/hawaiian-honeycreeper.css"
+            href="../frontend/css/theme/hawaiian-honeycreeper.css"
         />
     </head>
     <body>
@@ -18,7 +18,9 @@
             Theme
             <select id="theme-select">
                 <option value="">None</option>
-                <option selected value="css/theme/hawaiian-honeycreeper.css"
+                <option
+                    selected
+                    value="../frontend/css/theme/hawaiian-honeycreeper.css"
                     >Hawaiian honeycreeper</option
                 >
             </select>

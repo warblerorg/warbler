@@ -7,8 +7,5 @@
     },
     "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.referencesCodeLens.enabled": true,
-    "editor.formatOnSave": true,
-    "cSpell.words": [
-        "yacs"
-    ]
+    "editor.formatOnSave": true
 }
